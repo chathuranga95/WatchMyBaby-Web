@@ -1,0 +1,90 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+    float: left;
+    padding: 10px;
+    /*height: 300px;  Should be removed. Only for demonstration */
+}
+
+.left {
+  width: 35%;
+  background-color:rgb(255, 253, 253);
+}
+
+.right {
+  width: 65%;
+  background-color:white;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 25%;
+    align-content: center;
+    align-items: center
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+table {
+    width: 90%;
+    border-spacing: 0;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+}
+
+tbody, thead tr { display: block; }
+
+tbody {
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+tbody td, thead th {
+    width: 200px;
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;   
+}
+
+thead th:last-child {
+    width: 200px; 
+}
