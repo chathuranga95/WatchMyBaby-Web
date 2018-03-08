@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.20.1.js"></script>
+<script src="./js/volume-meter.js"></script>
+<script src="./js/volume-analyzer.js"></script>
+<script src="./js/main.js"></script>
+
+<title>Home</title>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/homeStyle.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">   
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="column left">
+            <h1>Lullaby List</h1>
+            <table id="table" class="display" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>File</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody" onclick="HTMLSelectElement">
+                    <tr>
+                        <td>File_001.mp3</td>
+                        <td>8.30 AM</td>
+                    </tr>
+                    <tr>
+                        <td>File_002.mp3</td>
+                        <td>9.30 AM</td>
+                    </tr>
+                    <tr>
+                        <td>File_001.mp3</td>
+                        <td>8.30 AM</td>
+                    </tr>
+                    <tr>
+                        <td>File_002.mp3</td>
+                        <td>9.30 AM</td>
+                    </tr>
+                    <tr>
+                        <td>File_001.mp3</td>
+                        <td>8.30 AM</td>
+                    </tr>
+                    <tr>
+                        <td>File_002.mp3</td>
+                        <td>9.30 AM</td>
+                    </tr>
+                    <tr>
+                        <td>File_001.mp3</td>
+                        <td>8.30 AM</td>
+                    </tr>
+                    <tr>
+                        <td>File_002.mp3</td>
+                        <td>9.30 AM</td>
+                    </tr>
+                    <tr>
+                        <td>File_001.mp3</td>
+                        <td>8.30 AM</td>
+                    </tr>
+                    <tr>
+                        <td>File_002.mp3</td>
+                        <td>9.30 AM</td>
+                    </tr>
+                    <tr>
+                        <td>File_001.mp3</td>
+                        <td>8.30 AM</td>
+                    </tr>
+                    <tr>
+                        <td>File_002.mp3</td>
+                        <td>9.30 AM</td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="button" id="tst" value="OK" onclick="fnselect()" />
+            <div style="align-self: center">
+                <input type="file" id="files" name="files[]" class="inputfile" />
+                <button>
+                    <label for="files">Add</label>
+                </button>
+                <output id="list"></output>
+
+                <script>
+                    function handleFileSelect(evt) {
+                        var files = evt.target.files; // FileList object
+                        for (var i = 0, f; f = files[i]; i++) {
+                            console.log("file object taken");
+                            uploadFile(f);
+                        }
+                    }
+                    document.getElementById('files').addEventListener('change', handleFileSelect, false);
+                </script>
+
+                <button>Delete</button>
+                <button>Set time</button>
+
+            </div>
+            <div>
+                <output id="progress"></output>
+            </div>
+
+        </div>
+        <div class="column right">
+            <h2>Status: Connected</h2>
+            <br>
+            <canvas id="meter" width="500" height="50"></canvas>
+            <br>
+            <button onclick="publishMsg();">Ping</button>
+            <br>
+            <h2>Camera Preview &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                <a onclick="cameraPreview();">
+                    <button style="width: 100px">ON</button>
+                </a>
+            </h2>
+
+            <div>
+                
+
+                <video id="video" width="320" height="240" autoplay>
+
+                </video>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+</body>
+
+</html>

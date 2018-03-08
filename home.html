@@ -5,132 +5,96 @@
 <script src="./js/volume-meter.js"></script>
 <script src="./js/volume-analyzer.js"></script>
 <script src="./js/main.js"></script>
-<!--<script src="http://cdn.pubnub.com/pubnub.min.js"></script>-->
-<!--<script src="http://pubnub.github.io/webrtc/webrtc-beta-pubnub.js"></script>-->
+<script src="./js/timer.js"></script>
+<script src="./js/lullabySchedular.js"></script>
+
+
+
+<!-- The webRTC video call JS files -->
+
+<script src="./js/jquery.min.js"></script>
+<script src="./js/videoCall.js"></script>
+<script src="./js/pubnub.min.js"></script>
+<script src="./js/webrtc2.js"></script>
+
 <title>Home</title>
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./css/homeStyle.css">
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 </head>
 
 <body>
 
     <div class="row">
+
+
+
         <div class="column left">
-            <h1>Lullaby List</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>File</th>
-                        <th>Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>File_001.mp3</td>
-                        <td>8.30 AM</td>
-                    </tr>
-                    <tr>
-                        <td>File_002.mp3</td>
-                        <td>9.30 AM</td>
-                    </tr>
-                    <tr>
-                        <td>File_001.mp3</td>
-                        <td>8.30 AM</td>
-                    </tr>
-                    <tr>
-                        <td>File_002.mp3</td>
-                        <td>9.30 AM</td>
-                    </tr>
-                    <tr>
-                        <td>File_001.mp3</td>
-                        <td>8.30 AM</td>
-                    </tr>
-                    <tr>
-                        <td>File_002.mp3</td>
-                        <td>9.30 AM</td>
-                    </tr>
-                    <tr>
-                        <td>File_001.mp3</td>
-                        <td>8.30 AM</td>
-                    </tr>
-                    <tr>
-                        <td>File_002.mp3</td>
-                        <td>9.30 AM</td>
-                    </tr>
-                    <tr>
-                        <td>File_001.mp3</td>
-                        <td>8.30 AM</td>
-                    </tr>
-                    <tr>
-                        <td>File_002.mp3</td>
-                        <td>9.30 AM</td>
-                    </tr>
-                    <tr>
-                        <td>File_001.mp3</td>
-                        <td>8.30 AM</td>
-                    </tr>
-                    <tr>
-                        <td>File_002.mp3</td>
-                        <td>9.30 AM</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div style="align-self: center">
-                <input type="file" id="files" name="files[]" class="inputfile" />
-                <button>
-                    <label for="files">Add</label>
-                </button>
-                <output id="list"></output>
-
-                <script>
-                    function handleFileSelect(evt) {
-                        var files = evt.target.files; // FileList object
-                        for (var i = 0, f; f = files[i]; i++) {
-                            console.log("file object taken");
-                            uploadFile(f);
-                        }
-                    }
-                    document.getElementById('files').addEventListener('change', handleFileSelect, false);
-                </script>
-
-                <button>Delete</button>
-                <button>Set time</button>
-
-            </div>
+            <h2>Status: Connected</h2>
             <div>
                 <output id="progress"></output>
             </div>
-
-        </div>
-        <div class="column right">
-            <h2>Status: Connected</h2>
             <br>
             <canvas id="meter" width="500" height="50"></canvas>
             <br>
             <button onclick="publishMsg();">Ping</button>
             <br>
             <h2>Camera Preview &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
-                <a onclick="videoCall();">
+                <a onclick="cameraPreview();">
                     <button style="width: 100px">ON</button>
                 </a>
             </h2>
 
             <div>
-                
-
                 <video id="video" width="320" height="240" autoplay>
-
                 </video>
-
-
             </div>
+        </div>
 
+        <div class="column right">
+            <div id="vid-box"></div>
+            <!-- Login with username -->
+            <button onclick="loginWithUserName();">Start monitoring</button>
+            <script type="text/javascript">
+                function initiateCall(userName, callName) {
+                    login(userName);
+                    console.log("logged in, waiting to dial...")
+                    setTimeout(function () {
+                        makeTheCall(callName);
+                    }, 2000);
+
+                }
+
+                function loginWithUserName() {
+                    login(localStorage.getItem("userName"));
+                }
+
+                //var audio = new Audio('https://firebasestorage.googleapis.com/v0/b/watchmybaby-52d18.appspot.com/o/songs%2Faudio%3A174710?alt=media&token=434f779d-32fc-47cb-9494-8e6d4e3f1744');
+                function playAudioFile() {
+                    audio.play();
+                    console.log("playing");
+                }
+                function stopAudioFile() {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }
+                function pauseAudioFile() {
+                    audio.pause();
+                }
+
+            </script>
+
+            <button onclick="playAudioFile();">play</button>
+            <button onclick="pauseAudioFile();">pause</button>
+            <button onclick="stopAudioFile();">stop</button>
 
         </div>
+
+
     </div>
+
 
 </body>
 

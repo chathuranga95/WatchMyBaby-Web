@@ -81,11 +81,11 @@ function drawLoop( time ) {
     // draw a bar based on the current volume
     canvasContext.fillRect(0, 0, currVol*WIDTH*1.4, HEIGHT);
     
-    //log max volume value
-    if(currVol>0.12){
-        console.log(currVol);
-        sendCryNotification();
-    }
+    // //log max volume value
+    // if(currVol>0.12){
+    //     console.log(currVol);
+    //     sendCryNotification();
+    // }
     
 
     // set up the next visual callback
