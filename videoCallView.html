@@ -5,18 +5,18 @@
 <script src="./js/pubnub.min.js"></script>
 <script src="./js/webrtc2.js"></script>
 
-
 <div id="vid-box" height="395" width="368"></div>
 
-
 <script type="text/javascript">
+    //To be called from the Android JS interface
     function initiateCall(userName, callName) {
-        login(userName);
-        console.log("logged in, waiting to dial...")
+        login(userName); //Login first
+        //wait and Make the call
         setTimeout(function () {
             makeTheCall(callName);
         }, 2000);
 
     }
 </script>
+
 </html>

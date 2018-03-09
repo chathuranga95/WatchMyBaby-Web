@@ -1,19 +1,4 @@
 // Login logic here
-function validate() {
-
-    var username = document.getElementById("uname").value;
-    var password = document.getElementById("psw").value;
-    if ((Authenticate(username, password))) {
-        window.location = "home.html"; // goto home page.
-        return false;
-    }
-    else {
-        alert("wrong username or password");
-        return false;
-    }
-}
-
-
 function Authenticate() {
     var uname = document.getElementById("uname").value;
     var psw = document.getElementById("psw").value;
@@ -37,7 +22,7 @@ function Authenticate() {
             var childData = childSnapshot.val();
             if (childKey == "password") {
                 if (childData == psw) {
-                    localStorage.setItem("userName",uname);
+                    localStorage.setItem("userName",uname); //save user-name on the local storage
                     window.location = "home.html"; // goto home page.
                     return false;
                 }
@@ -45,20 +30,6 @@ function Authenticate() {
             console.log(childKey + " :  " + childData);
         });
     });
-
-    // //compare for password and take action
-    // var ret = firebase.database().ref(uname).once('value').then(function (snapshot) {
-    //     if (snapshot.val() == psw) {
-    //     window.location = "home.html"; // goto home page.
-    //     }
-    //     else{
-    //         alert("wrong username or password");
-    //     }
-    // });
-
-    // if (!ret) {
-    //     alert("wrong username or password");
-    // }
 }
 
 //play store opening function
