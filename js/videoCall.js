@@ -1,7 +1,8 @@
-ready = false;
+var inCall = false;
+var phone;
 
 function login(userName) {
-    
+
     var video_out = document.getElementById("vid-box"); //video will be appeared on this component
 
     var phone = window.phone = PHONE({
@@ -13,8 +14,20 @@ function login(userName) {
     console.log("Ready to receive calls");
 
     phone.receive(function (session) {
-        session.connected(function (session) { video_out.appendChild(session.video); });
-        session.ended(function (session) { video_out.innerHTML = ''; });
+        session.connected(function (session) {
+            video_out.appendChild(session.video);
+            inCall = true;
+            console.log("Call started");
+            if (getPlayingStatus()) {
+                stopAudioFile();
+            }
+        });
+        session.ended(function (session) {
+            video_out.innerHTML = '';
+            inCall = false;
+            console.log("Call finished");
+            window.location = "home.html";
+        });
     });
 
     return false;
@@ -24,4 +37,16 @@ function makeTheCall(callName) {
     phone.dial(callName);
     console.log("dialing...");
     return false;
+}
+
+//call status getter for the lullaby player.
+function getInCallStatus() {
+    return inCall;
+}
+
+//function to disconnect the video call
+function hangUpCall() {
+    console.log("Call finish request");
+    inCall = false;
+    phone.hangup();
 }

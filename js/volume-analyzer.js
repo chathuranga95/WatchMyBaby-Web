@@ -2,42 +2,42 @@
 var audioContext = null;
 var meter = null;
 var canvasContext = null;
-var WIDTH=500;
-var HEIGHT=50;
+var WIDTH = 500;
+var HEIGHT = 50;
 var rafID = null;
 
-window.onload = function() {
+window.onload = function () {
 
     // grab our canvas
-	canvasContext = document.getElementById( "meter" ).getContext("2d");
-	
+    canvasContext = document.getElementById("meter").getContext("2d");
+
     // monkeypatch Web Audio
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
-	
+
     // grab an audio context
     audioContext = new AudioContext();
 
     // Attempt to get audio input
     try {
         // monkeypatch getUserMedia
-        navigator.getUserMedia = 
-        	navigator.getUserMedia ||
-        	navigator.webkitGetUserMedia ||
-        	navigator.mozGetUserMedia;
+        navigator.getUserMedia =
+            navigator.getUserMedia ||
+            navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia;
 
         // ask for an audio input
         navigator.getUserMedia(
-        {
-            "audio": {
-                "mandatory": {
-                    "googEchoCancellation": "false",
-                    "googAutoGainControl": "false",
-                    "googNoiseSuppression": "false",
-                    "googHighpassFilter": "false"
+            {
+                "audio": {
+                    "mandatory": {
+                        "googEchoCancellation": "false",
+                        "googAutoGainControl": "false",
+                        "googNoiseSuppression": "false",
+                        "googHighpassFilter": "false"
+                    },
+                    "optional": []
                 },
-                "optional": []
-            },
-        }, gotStream, didntGetStream);
+            }, gotStream, didntGetStream);
     } catch (e) {
         alert('getUserMedia threw exception :' + e);
     }
@@ -62,14 +62,14 @@ function gotStream(stream) {
     // kick off the visual updating
     drawLoop();
 
-    
+
 }
 var mxvol = 0;
 var currVol = 0;
 
-function drawLoop( time ) {
+function drawLoop(time) {
     // clear the background
-    canvasContext.clearRect(0,0,WIDTH,HEIGHT);
+    canvasContext.clearRect(0, 0, WIDTH, HEIGHT);
 
     // check if we're currently clipping
     if (meter.checkClipping())
@@ -79,15 +79,17 @@ function drawLoop( time ) {
 
     currVol = meter.volume;
     // draw a bar based on the current volume
-    canvasContext.fillRect(0, 0, currVol*WIDTH*1.4, HEIGHT);
-    
-    // //log max volume value
-    // if(currVol>0.12){
-    //     console.log(currVol);
-    //     sendCryNotification();
-    // }
-    
+    canvasContext.fillRect(0, 0, currVol * WIDTH * 1.4, HEIGHT);
+
+
+    //monitor the sound level and send notifications to the android app, if lullaby is not playing
+    if (!getPlayingStatus() && !getInCallStatus()) {
+        if (currVol > 0.12) {
+            console.log(currVol);
+            // sendCryNotification();
+        }
+    }
 
     // set up the next visual callback
-    rafID = window.requestAnimationFrame( drawLoop );
+    rafID = window.requestAnimationFrame(drawLoop);
 }
