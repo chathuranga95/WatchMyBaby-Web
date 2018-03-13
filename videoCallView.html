@@ -1,24 +1,38 @@
+<!DOCTYPE html>
 <html>
-<meta name="viewport" content="width=368, height=395, initial-scale=1" />
-<script src="./js/jquery.min.js"></script>
-<script src="./js/videoCall.js"></script>
-<script src="./js/pubnub.min.js"></script>
-<script src="./js/webrtc2.js"></script>
 
-<h1>caller interface v - 1.0</h1>
+<body style="background-color:black;">
+    <meta name="viewport" content="width=368, height=395, initial-scale=1" />
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/videoCall.js"></script>
+    <script src="./js/pubnub.min.js"></script>
+    <script src="./js/webrtc2.js"></script>
 
-<div id="vid-box" height="395" width="368"></div>
+    <div id="vid-box" height="395" width="368" z-index="1">
+    </div>
+    <div id = "connectInfoDiv" z-index = "-1">
+        <font color="white">
+            <h1 style="position: fixed; bottom: 0; width:100%; text-align: center"> Connecting....
+            </h1>
+        </font>
+    </div>
+    <!-- <button onclick="clearDiv();">clear</button> -->
 
-<script type="text/javascript">
-    //To be called from the Android JS interface
-    function initiateCall(userName, callName) {
-        login(userName); //Login first
-        //wait and Make the call
-        setTimeout(function () {
-            makeTheCall(callName);
-        }, 2000);
-    }
 
-</script>
+    <script type="text/javascript">
+        //To be called from the Android JS interface
+        function initiateCall(userName, callName) {
+            login(userName); //Login first
+            //wait and Make the call
+            setTimeout(function () {
+                makeTheCall(callName);
+            }, 2000);
+        }
+        function clearInfoDiv(){
+            document.getElementById("connectInfoDiv").innerHTML = '';
+        }
+
+    </script>
+</body>
 
 </html>

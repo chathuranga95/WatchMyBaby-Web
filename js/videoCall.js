@@ -1,9 +1,11 @@
 var inCall = false;
 var phone;
 
+
 function login(userName) {
 
     var video_out = document.getElementById("vid-box"); //video will be appeared on this component
+    // var infoDiv = document.getElementById("loadingInfo");
 
     var phone = window.phone = PHONE({
         number: "watchMyBabyWeb" + userName, //listen on prefix+username
@@ -21,6 +23,8 @@ function login(userName) {
             if (getPlayingStatus()) {
                 stopAudioFile();
             }
+            // infoDiv.innerHTML = '';
+            // console.log("cleared the connecting... text");
         });
         session.ended(function (session) {
             video_out.innerHTML = '';

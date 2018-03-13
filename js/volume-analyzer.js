@@ -5,6 +5,7 @@ var canvasContext = null;
 var WIDTH = 500;
 var HEIGHT = 50;
 var rafID = null;
+var holdOn = false;
 
 window.onload = function () {
 
@@ -82,11 +83,20 @@ function drawLoop(time) {
     canvasContext.fillRect(0, 0, currVol * WIDTH * 1.4, HEIGHT);
 
 
+    
     //monitor the sound level and send notifications to the android app, if lullaby is not playing
     if (!getPlayingStatus() && !getInCallStatus()) {
-        if (currVol > 0.22) {
-            console.log(currVol);
-            // sendCryNotification();
+        if (!holdOn) {
+            if (currVol > 0.22) {
+                console.log(currVol);
+                sendCryNotification();
+                holdOn = true;
+                console.log("cry notification sent. holding for 30 secs to listen again...")
+                setTimeout(function(){
+                    holdOn = false;
+                    console.log("holding abroad. listening again.")
+                },10000);
+            }
         }
     }
 

@@ -3,7 +3,7 @@ var isPlaying = false;
 
 //Function to play a given lullaby
 function playLullaby(path) {
-    var songRef = storageRef.child('songs/' + path); //Reference to the file on storage
+    var songRef = storageRef.child(localStorage.getItem("userName")+'/songs/' + path); //Reference to the file on storage
 
     songRef.getDownloadURL().then(function (url) { // Get the download URL
         songAudio = new Audio(url); //Create audio instance and Play
