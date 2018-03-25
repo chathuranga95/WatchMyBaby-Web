@@ -6,6 +6,17 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="./css/aboutStyle.css">
 <link rel="shortcut icon" href="./img/baby_icon.png" />
+<script>
+    function logout() {
+        console.log("Logout request");
+        localStorage.setItem("userName", "");
+    }
+
+    if (localStorage.getItem("userName") == "") {
+        window.location = "index.html"; // redirect to login page if username is empty
+    }
+
+</script>
 
 <body>
     <ul class="nav">
@@ -16,7 +27,7 @@
             <a class="active" href="about.html">About</a>
         </li>
         <li class="nav" style="float:right">
-            <a href="index.html">Logout</a>
+            <a onclick="logout()" href="index.html">Logout</a>
         </li>
     </ul>
 

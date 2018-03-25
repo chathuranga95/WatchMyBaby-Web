@@ -16,6 +16,8 @@ var storage = firebase.storage();
 var storageRef = storage.ref();
 
 
+
+
 //File uploading function
 function uploadFile(file) {
     // Create a reference to file on storage
@@ -51,15 +53,28 @@ function uploadFile(file) {
 function cameraPreview() {
     // Grab elements, create settings, etc.
     var video = document.getElementById("video");
+    var btnPrev = document.getElementById("btnPrev");
 
-    // Get access to the camera!
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        // Not adding `{ audio: true }` since we only want video now
-        navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
-            video.src = window.URL.createObjectURL(stream);
-            video.play();
-        });
+    if (btnPrev.innerHTML == "ON") {
+        // Get access to the camera!
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            // Not adding `{ audio: true }` since we only want video now
+            navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+                video.src = window.URL.createObjectURL(stream);
+                video.play();
+            });
+
+            btnPrev.innerHTML = "OFF";
+        }
     }
+    else if (btnPrev.innerHTML == "OFF") {
+        video.src = null;
+        btnPrev.innerHTML = "ON";
+    }
+
+
+
+
 }
 
 //Pubnub initiate
