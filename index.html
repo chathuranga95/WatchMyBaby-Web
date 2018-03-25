@@ -10,6 +10,7 @@ and open the template in the editor.
 <title>Login - Watch My Baby</title>
 
 <head>
+  <link rel="shortcut icon" href="./img/baby_icon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./css/loginStyle.css">
 </head>
@@ -21,19 +22,25 @@ and open the template in the editor.
     </div>
 
     <div class="container">
-      <label><b>Username</b></label>
+      <label>
+        <b>Username</b>
+      </label>
       <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
 
-      <label><b>Password</b></label>
+      <label>
+        <b>Password</b>
+      </label>
       <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
 
       <script src="./js/login.js"></script>
-      <a id="btnLogin" onclick="Authenticate()"><button type="button">Go in</button></a>      
+      <a id="btnLogin" onclick="Authenticate()">
+        <button type="button">Go in</button>
+      </a>
     </div>
 
     <div class="container" style="background-color:#f1f1f1">
       New to Watch-My-Baby? Get the App and Create a Account!
-      <a href="https://play.google.com/" target="_blank">Goto play store</a>      
+      <a href="https://play.google.com/" target="_blank">Goto play store</a>
     </div>
   </form>
 

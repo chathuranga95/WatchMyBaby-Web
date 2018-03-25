@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
 <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.20.1.js"></script>
 <script src="./js/volume-meter.js"></script>
@@ -12,62 +13,84 @@
 <script src="./js/jquery.min.js"></script>
 <script src="./js/videoCall.js"></script>
 <script src="./js/pubnub.min.js"></script>
-<script src="./js/webrtc2.js"></script>
+<!-- <script src="./js/webrtc2.js"></script> -->
+<script src="./js/webRTC-v2.js"></script>
+<script>
+    function logout() {
+        console.log("Logout request");
+        localStorage.setItem("userName","");
+    }
+</script>
 
 <title>Home</title>
 
 <head>
+    <link rel="shortcut icon" href="./img/baby_icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./css/homeStyle.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"> -->
+    <script>
+        if (localStorage.getItem("userName") == "") {
+            window.location = "index.html"; // redirect to login page if username is empty
+        }
+    </script>
 </head>
 
 <body>
+    <ul>
+        <li>
+            <a class="active" href="home.html">Home</a>
+        </li>
+        <li>
+            <a href="about.html">About</a>
+        </li>
+        <li style="float:right">
+            <a onclick="logout()" href="index.html">Logout</a>
+        </li>
+    </ul>
 
-    <div class="row">
+    <div class="bg">
+        <div class="row">
+            <div class="column left">
+                <h3>Noise level bar</h3>
+                <div>
+                    <output id="progress"></output>
+                </div>
+                <br>
+                <canvas id="meter" width="500" height="50"></canvas>
+                <br>
+                <!-- <button onclick="publishMsg();">Ping</button> -->
+                <br>
+                <h2>Camera Preview &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                    <a onclick="cameraPreview();">
+                        <button style="width: 100px">ON</button>
+                    </a>
+                </h2>
 
-
-
-        <div class="column left">
-            <h2>Status: Connected</h2>
-
-            <div>
-                <output id="progress"></output>
+                <div>
+                    <video id="video" width="320" height="240" autoplay>
+                    </video>
+                </div>
             </div>
-            <br>
-            <canvas id="meter" width="500" height="50"></canvas>
-            <br>
-            <button onclick="publishMsg();">Ping</button>
-            <br>
-            <h2>Camera Preview &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
-                <a onclick="cameraPreview();">
-                    <button style="width: 100px">ON</button>
-                </a>
-            </h2>
 
-            <div>
-                <video id="video" width="320" height="240" autoplay>
-                </video>
+            <div class="column right">
+                <div>
+                    <button onclick="playAudioFile();">Play</button>
+                    <button onclick="pauseAudioFile();">Pause</button>
+                    <button onclick="stopAudioFile();">Stop</button>
+                </div>
+
+                <div id="vid-box"></div>
+
+
+                <!--Auto Login with username when logged in or reloaded-->
+                <script type="text/javascript">
+                    function loginWithUserName() {
+                        login(localStorage.getItem("userName"));
+                    }
+                    loginWithUserName();
+                </script>
             </div>
-        </div>
-
-        <div class="column right">
-            <div>
-                <button onclick="playAudioFile();">Play</button>
-                <button onclick="pauseAudioFile();">Pause</button>
-                <button onclick="stopAudioFile();">Stop</button>
-            </div>
-
-            <div id="vid-box"></div>
-            
-
-            <!--Auto Login with username when logged in or reloaded-->
-            <script type="text/javascript">
-                function loginWithUserName() {
-                    login(localStorage.getItem("userName"));
-                }
-                loginWithUserName();
-            </script>
         </div>
     </div>
 </body>
