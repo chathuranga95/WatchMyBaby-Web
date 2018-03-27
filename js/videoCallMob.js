@@ -29,13 +29,11 @@ function login(userName) {
             video_out.innerHTML = '';
             inCall = false;
             console.log("Call finished");
-            window.location = "home.html";
         });
     });
 
     return false;
 }
-
 
 function makeTheCall(callName) {
     phone.dial(callName);

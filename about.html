@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Aboout</title>
+<title>About</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -9,10 +9,10 @@
 <script>
     function logout() {
         console.log("Logout request");
-        localStorage.setItem("userName", "");
+        localStorage.removeItem("userName");
     }
 
-    if (localStorage.getItem("userName") == "") {
+    if (localStorage.getItem("userName") == null) {
         window.location = "index.html"; // redirect to login page if username is empty
     }
 
@@ -28,6 +28,14 @@
         </li>
         <li class="nav" style="float:right">
             <a onclick="logout()" href="index.html">Logout</a>
+        </li>
+        <li class="nav" id="namebar" style="float:right">
+            <script>
+                //fill namebar to show logged in as
+                var nameslot = document.getElementById("namebar");
+                nameslot.innerHTML = "<a>You are logged in as " + localStorage.getItem("userName") + " | </a>";
+
+            </script>
         </li>
     </ul>
 
@@ -79,6 +87,13 @@
                         <li>To learn more about Watch My Baby and its functionalities, please refer to the official documentation
                             of the Watch My Baby system</li>
                     </ul>
+                </p>
+                <p> </p>
+                <p class="w3-large">Developed by Chathuranga Siriwardhana, for the 3rd year SEP @ UOM.
+                    <br>
+                    <a href="https://www.linkedin.com/in/chathurangasiriwardhana/">Linked In</a>
+                
+                    <a href="https://github.com/chathuranga95">Github</a>
                 </p>
             </div>
         </div>

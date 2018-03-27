@@ -15,9 +15,6 @@ var storage = firebase.storage();
 // Create a storage reference from storage service
 var storageRef = storage.ref();
 
-
-
-
 //File uploading function
 function uploadFile(file) {
     // Create a reference to file on storage
@@ -87,6 +84,10 @@ var pubnubObj = new PubNub({
 pubnubObj.addListener({
     message: function (message) {
         console.log("received msg: ", message)
+        if (message.message.message == 'reload request') {
+            window.location = "home.html";
+            console.log("reload triggered");
+        }
     }
 })
 

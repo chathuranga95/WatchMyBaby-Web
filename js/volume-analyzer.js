@@ -87,7 +87,7 @@ function drawLoop(time) {
     //monitor the sound level and send notifications to the android app, if lullaby is not playing
     if (!getPlayingStatus() && !getInCallStatus()) {
         if (!holdOn) {
-            if (currVol > 0.22) {
+            if (currVol > 0.22) { //this value is depend on the baby's cry sound intensity
                 console.log(currVol);
                 sendCryNotification();
                 holdOn = true;

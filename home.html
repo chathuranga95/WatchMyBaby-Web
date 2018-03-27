@@ -18,7 +18,7 @@
 <script>
     function logout() {
         console.log("Logout request");
-        localStorage.setItem("userName", "");
+        localStorage.removeItem("userName");
     }
 </script>
 
@@ -30,8 +30,11 @@
     <link rel="stylesheet" href="./css/homeStyle.css">
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"> -->
     <script>
-        if (localStorage.getItem("userName") == "") {
+        if (localStorage.getItem("userName") == null) {
             window.location = "index.html"; // redirect to login page if username is empty
+        }
+        function refreshPage(){
+            window.location = "home.html";
         }
     </script>
 </head>
@@ -53,7 +56,7 @@
                 //fill namebar to show logged in as
                 var nameslot = document.getElementById("namebar");
                 nameslot.innerHTML = "<a>You are logged in as " + localStorage.getItem("userName") + " | </a>";
-                console.log(nameslot);
+
             </script>
         </li>
     </ul>
@@ -68,7 +71,7 @@
                 <br>
                 <canvas id="meter" width="500" height="50"></canvas>
                 <br>
-                <!-- <button onclick="publishMsg();">Ping</button> -->
+                <button onclick="publishMsg();">Ping</button>
                 <br>
                 <h2>Camera Preview &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
                     <a onclick="cameraPreview();">
