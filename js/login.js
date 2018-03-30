@@ -3,6 +3,11 @@ function Authenticate() {
     var uname = document.getElementById("uname").value;
     var psw = document.getElementById("psw").value;
 
+    if (uname == "" || psw == "") {
+        alert("Please enter your Username and password correct!");
+        window.location = "index.html";
+    }
+
     var ps = new ProductCipher();
     var enctxt = ps.Encrypt("watch my baby username " + uname, psw);
     console.log("Encrypted text: " + enctxt);
@@ -30,18 +35,20 @@ function Authenticate() {
                     window.location = "home.html"; // goto home page.
                     return false;
                 }
-                else{
+                else {
                     alert("Username or password incorrect, please try again!");
+                    window.location = "index.html";
                 }
             }
             console.log(childKey + " :  " + childData);
         });
-        if(snapshot==null){
+        if (snapshot.val() == null) {
             alert("Username or password incorrect, please try again!");
+            window.location = "index.html";
         }
     });
 
-    
+
 }
 
 //play store opening function
